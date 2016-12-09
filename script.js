@@ -11,7 +11,7 @@ $(document).ready(function() {
 		if (derivative == null) {
 			var html = "<br id='dr_br1><div id='derivative'>Sorry, that format is incorrect. Please try again.</div><br id='dr_br2>"
 		} else {
-			var html = "<br id='dr_br1'><div id='derivative'>The derivative of [" + baseFormula + "] is {" + derivative[0] + "}.</div><br id='dr_br2'>"
+			var html = "<br id='dr_br1'><div id='derivative'>The derivative of [" + baseFormula + "] is {" + derivative[0] + "}. The y-coordinates of the derivative graph from -5 <= x <= 5 are as follows: (" + derivative[1] + ").</div><br id='dr_br2'>"
 		}
 		$("#form").append(html);
 	})
@@ -23,7 +23,6 @@ $(document).ready(function() {
 		var signs_in_order = [];
 		console.log(initial_split_equation.length);
 		for (i = 0; i < initial_split_equation.length; i++) {
-			console.log(i);
 			if (initial_split_equation[i] != "+" && initial_split_equation[i] != "-") {
 				console.log(initial_split_equation[i]);
 				equation_individual_components.push(initial_split_equation[i]);
@@ -46,13 +45,10 @@ $(document).ready(function() {
 		var solved = [];
 		for (i = 0; i < components.length; i++) {
 			var new_component = components[i].replace(/[()]/g, '');
-			console.log(new_component);
 			var derivative_ready = [];
-			console.log(new_component.length);
 			if (components[i].indexOf("^") >= 0) {
 				for (x = 0; x < new_component.length; x++) {
 					derivative_ready = new_component.split("^");
-					console.log(derivative_ready);
 					if (derivative_ready[0].length >= 2) {
 						var derivative_ready_2 = derivative_ready.join("").toLowerCase().split("x");
 						derivative_ready = derivative_ready_2;
@@ -60,7 +56,6 @@ $(document).ready(function() {
 						derivative_ready[0] = "1";
 					}
 				}
-				console.log(derivative_ready);
 				var coefficient = Number(derivative_ready[0]) * Number(derivative_ready[1]);
 				var exponent = Number(derivative_ready[1]) - 1;
 				if (exponent > 1) {
@@ -75,15 +70,13 @@ $(document).ready(function() {
 				console.log(baseSplit);
 				solved.push(baseSplit[0]);
 			} else {
-				
+				//do nothing
 			}	
 		}
 		return solved;
 	}
 
 	function combine_to_equation(components, signs) {
-		console.log(components);
-		console.log(signs);
 		var combined_array = []
 		if (components.length == 1) {
 			return components.join("");
@@ -98,10 +91,7 @@ $(document).ready(function() {
 				
 			}	
 		}
-		
-		console.log(combined_array);
 		var complete = combined_array.join(" ");
-		console.log(complete);
 		if (complete == null) {
 			return "incorrect";
 		} else {
